@@ -25,7 +25,7 @@ isolated scripts.
 
 ```mermaid
 flowchart LR
-    A[iPhone screen] -->|USB screenshot service| B[macOS capture loop]
+    A[iPhone screen] -->|USB or paired Wi-Fi screenshot service| B[macOS capture loop]
     B --> C[ROI preprocessing]
     C --> D[OpenCV template matching]
     D -->|two-frame confirmation| E[USB serial command]
@@ -89,7 +89,7 @@ complete system was exercised against real ads and iOS gesture behaviour.
 
 | Property | Configuration |
 | --- | --- |
-| Capture | Persistent USB screenshot connection |
+| Capture | Persistent USB or paired Wi-Fi screenshot connection |
 | Working frame | 450 x 970 pixels |
 | Detection ROI | 55 x 50 pixels |
 | Nominal sampling interval | 250 ms |
@@ -130,7 +130,7 @@ reels-ad-skipper/
 ## Hardware and software requirements
 
 - A Mac with Python, Xcode command-line tools, and `arduino-cli`
-- An iPhone connected with a data-capable USB cable
+- An iPhone connected by USB for initial pairing; normal runs can use Wi-Fi
 - An ESP32 with Bluetooth Low Energy support
 - iPhone Developer Mode and AssistiveTouch enabled
 
@@ -165,6 +165,14 @@ Find the device identifier:
 
 Copy the reported `Identifier` into `device_udid` in `config.json`.
 
+USB is required for the initial trust and developer pairing. After that, the
+iPhone can be unplugged when it is discoverable on the same local network. To
+verify wireless discovery:
+
+```bash
+.venv/bin/python -m pymobiledevice3 remote browse --timeout 5
+```
+
 ### 3. Build and flash the ESP32
 
 Install `arduino-cli` first if it is not already available. The setup script
@@ -188,7 +196,7 @@ ls /dev/cu.usbserial-*
 
 ## Running it
 
-Connect both devices, unlock the iPhone, open Instagram Reels, and run:
+Connect the ESP32, unlock the iPhone, open Instagram Reels, and run:
 
 ```bash
 ./Start\ Reels\ Ad\ Skipper.command
@@ -198,7 +206,8 @@ The same launcher can be double-clicked in Finder. Keep its Terminal window
 open and press `Control-C` to stop.
 
 QuickTime does not need to be open, and no mirrored phone window needs to remain
-visible on the Mac.
+visible on the Mac. The iPhone may remain unplugged if its authenticated
+wireless developer connection is available; otherwise connect it by USB.
 
 ## Calibration and diagnostics
 
