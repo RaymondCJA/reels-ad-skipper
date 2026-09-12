@@ -1,0 +1,7 @@
+.arduino/
+.venv/
+.swift-cache/
+capture-helper/.build/
+config.json
+__pycache__/
+*.pyc

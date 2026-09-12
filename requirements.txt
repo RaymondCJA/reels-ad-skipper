@@ -1,0 +1,6 @@
+opencv-python>=4.10,<5
+mss>=10,<11
+numpy>=2,<3
+pyserial>=3.5,<4
+pymobiledevice3>=11.12,<12
+pyobjc-framework-Quartz>=10,<13; sys_platform == "darwin"

@@ -1,0 +1,20 @@
+{
+  "monitor": 1,
+  "capture_source": "screenshot",
+  "capture_helper": "capture-helper/.build/release/iphone-capture",
+  "capture_width": 450,
+  "capture_height": 970,
+  "capture_fps": 4.0,
+  "device_udid": null,
+  "window_owner": "QuickTime Player",
+  "window_title": "Movie Recording",
+  "roi": [390, 815, 55, 50],
+  "templates_dir": "templates",
+  "match_threshold": 0.68,
+  "confirmations_required": 2,
+  "cooldown_seconds": 2.5,
+  "sample_interval_seconds": 0.25,
+  "serial_port": "/dev/cu.usbserial-0001",
+  "serial_baud": 115200,
+  "trigger_command": "SWIPE"
+}
